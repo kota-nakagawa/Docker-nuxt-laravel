@@ -1,0 +1,99 @@
+version: '3'
+services:
+
+    nginx:
+      build: ./docker/nginx
+      container_name: "nginx"
+      volumes:
+          - ./laravel:/var/www/html
+          - "phpsocket:/var/run"
+      ports:
+          - "8000:80"
+      depends_on:
+          - php
+
+    php:
+      build: ./docker/php-fpm
+      container_name: "laravel"
+      volumes:
+          - ./laravel:/var/www/html
+          - ./docker/php-fpm/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
+          - ./database:/app/database
+          - "phpsocket:/var/run"
+
+    composer:
+      build: ./docker/composer
+      container_name: "composer"
+      volumes:
+          - ./laravel:/var/www/html
+
+    postgres:
+      image: postgres:10.4-alpine
+
+      container_name: "postgres"
+      volumes:
+          - ./postgres:/var/lib/postgresql/data
+      ports:
+          - "5432:5432"
+      environment:
+          - POSTGRES_USER=root
+          - POSTGRES_PASSWORD=password
+      restart: always
+      tty: true
+
+    pgweb:
+      build: ./docker/pgweb
+      container_name: "pgweb"
+      ports:
+          - "8081:8081"
+      environment:
+          - DATABASE_URL=postgres://root:password@postgres:5432/sample?sslmode=disable
+      links:
+          - postgres:postgres
+      restart: always
+      depends_on:
+          - postgres
+      command: wait.sh
+
+    redis:
+      image: redis:4.0.9-alpine
+      container_name: "redis"
+      volumes:
+          - ./redis:/data
+      ports:
+          - "6379:6379"
+      restart: always
+      tty: true
+      
+    redis-commander:
+      container_name: "redis-commander"
+      build: ./docker/redis-commander
+      links:
+          - redis:redis
+      ports:
+          - "8080:8080"
+      command: --redis-host redis --port 8080
+
+    nuxt:
+      build: ./docker/nuxt
+      container_name: "nuxt"
+      volumes:
+          - ./nuxt:/var/www/html/nuxt
+      ports:
+        - "3000:3000"
+      tty: true
+
+    mailcatcher:
+      restart: always
+      image: schickling/mailcatcher
+      container_name: 'mailcatcher'
+      ports:
+          - "1080:1080"
+          - "1025:1025"
+
+volumes:
+    postgres-data:
+      driver: local
+    pgweb-data:
+      driver: local
+    phpsocket:

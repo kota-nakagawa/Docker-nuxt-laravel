@@ -31,6 +31,8 @@ http://localhost:3000  にアクセスすると、ユーザーページ(nuxt.js)
 
 http://localhost:8000  にアクセスすると、apiサーバー(laravel)が表示されます。
 
+http://localhost:8080 にアクセスすると、redis(redis-commander)が表示されます。
+
 http://localhost:8081  にアクセスすると、pgweb(postgresql)が表示されます。
 
 #### 最後に

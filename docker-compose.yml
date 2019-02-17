@@ -28,8 +28,7 @@ services:
           - ./laravel:/var/www/html
 
     postgres:
-      image: postgres:10.4-alpine
-
+      image: postgres:11.1-alpine
       container_name: "postgres"
       volumes:
           - ./postgres:/var/lib/postgresql/data
@@ -42,8 +41,8 @@ services:
       tty: true
 
     pgweb:
-      build: ./docker/pgweb
-      container_name: "pgweb"
+      image: nyankokota/pgweb:latest
+      container_name: "pgweb"      
       ports:
           - "8081:8081"
       environment:
@@ -56,7 +55,7 @@ services:
       command: wait.sh
 
     redis:
-      image: redis:4.0.9-alpine
+      image: redis:5.0.3-alpine
       container_name: "redis"
       volumes:
           - ./redis:/data
@@ -65,9 +64,9 @@ services:
       restart: always
       tty: true
       
-    redis-commander:
-      container_name: "redis-commander"
-      build: ./docker/redis-commander
+     redis-commander:
+      image: nyankokota/redis-commander:latest
+      container_name: "redis-commander"      
       links:
           - redis:redis
       ports:
@@ -83,12 +82,12 @@ services:
         - "3000:3000"
 
     mailcatcher:
-      restart: always
-      image: schickling/mailcatcher
+      image: nyankokota/mailcatcher:latest
       container_name: 'mailcatcher'
       ports:
-          - "1080:1080"
+          - "8082:8082"
           - "1025:1025"
+      restart: always
 
 volumes:
     postgres-data:

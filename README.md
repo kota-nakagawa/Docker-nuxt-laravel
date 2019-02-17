@@ -25,8 +25,6 @@ $ docker-compose up
 
 このコマンドを入力後、
 
-http://localhost:1080  にアクセスすると、mail(mailcatcher)が表示されます。
-
 http://localhost:3000  にアクセスすると、ユーザーページ(nuxt.js)が表示されます。
 
 http://localhost:8000  にアクセスすると、apiサーバー(laravel)が表示されます。
@@ -34,6 +32,8 @@ http://localhost:8000  にアクセスすると、apiサーバー(laravel)が表
 http://localhost:8080 にアクセスすると、redis(redis-commander)が表示されます。
 
 http://localhost:8081  にアクセスすると、pgweb(postgresql)が表示されます。
+
+http://localhost:8082  にアクセスすると、mail(mailcatcher)が表示されます。
 
 #### 最後に
 

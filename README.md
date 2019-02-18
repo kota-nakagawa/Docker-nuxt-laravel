@@ -1,10 +1,10 @@
-### Docker環境の準備
+### 開発環境の準備
 
-開発には全面的にDockerとDocker Composeを用います。
+開発にはDockerとDocker Composeを用います。
 そのためDockerとDocker Composeに関してはインストールが必要です。
-WindowsOSは非対応となっています。
+Windowsは非対応となっています。
 
-#### Run setup script
+### 開発環境の構築
 
 下記を叩くだけで環境構築をすべて完了します。
 順番に実行してください。
@@ -12,12 +12,14 @@ WindowsOSは非対応となっています。
 ```
 $ git clone https://github.com/nyanko-kota/Docker-nuxt-laravel
 ```
-
+```
+$ cd Docker-nuxt-laravel
+```
 ```
 $ ./setup.sh
 ```
 
-#### アプリの起動
+### アプリの起動
 
 ```
 $ docker-compose up
@@ -35,7 +37,7 @@ http://localhost:8081  にアクセスすると、pgweb(postgresql)が表示さ�
 
 http://localhost:8082  にアクセスすると、mail(mailcatcher)が表示されます。
 
-#### 最後に
+### 最後に
 
 この環境はテスト用です。
 セキュリティの問題により本番には流用できないのでご注意ください。

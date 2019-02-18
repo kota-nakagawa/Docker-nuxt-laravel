@@ -64,7 +64,7 @@ services:
       restart: always
       tty: true
       
-     redis-commander:
+    redis-commander:
       image: nyankokota/redis-commander:latest
       container_name: "redis-commander"      
       links:

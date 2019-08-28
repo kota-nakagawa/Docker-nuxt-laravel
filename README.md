@@ -1,3 +1,6 @@
+# Docker-nuxt-laravel
+[![MIT License](https://img.shields.io/github/license/nyanko-kota/Docker-nuxt-laravel.svg?style=flat)](https://github.com/nyanko-kota/Docker-nuxt-laravel/blob/master/LICENSE.txt)
+
 ### 開発環境の準備
 
 開発にはDockerとDocker Composeを用います。
